@@ -143,6 +143,8 @@ pub enum Scheme {
     Mongodb,
     /// [gridfs](crate::services::gridfs): MongoDB Gridfs Services
     Gridfs,
+    /// [ghaa](crate::services::ghaa): GitHub Action Artifacts Services
+    Ghaa,
     /// Custom that allow users to implement services outside of OpenDAL.
     ///
     /// # NOTE
@@ -275,6 +277,8 @@ impl Scheme {
             Scheme::Redb,
             #[cfg(feature = "services-mongodb")]
             Scheme::Mongodb,
+            #[cfg(feature = "service-ghaa")]
+            Scheme::Ghaa,
         ])
     }
 }
@@ -355,6 +359,7 @@ impl FromStr for Scheme {
             "tikv" => Ok(Scheme::Tikv),
             "azfile" => Ok(Scheme::Azfile),
             "mongodb" => Ok(Scheme::Mongodb),
+            "ghaa" => Ok(Scheme::Ghaa),
             _ => Ok(Scheme::Custom(Box::leak(s.into_boxed_str()))),
         }
     }
@@ -417,6 +422,7 @@ impl From<Scheme> for &'static str {
             Scheme::Mongodb => "mongodb",
             Scheme::Alluxio => "alluxio",
             Scheme::Upyun => "upyun",
+            Scheme::Ghaa => "ghaa",
             Scheme::Pcloud => "pcloud",
             Scheme::Custom(v) => v,
         }

@@ -347,3 +347,8 @@ mod pcloud;
 pub use pcloud::Pcloud;
 #[cfg(feature = "services-pcloud")]
 pub use pcloud::PcloudConfig;
+
+#[cfg(feature = "services-ghaa")]
+mod ghaa;
+#[cfg(feature = "services-ghaa")]
+pub use ghaa::Ghaa;
